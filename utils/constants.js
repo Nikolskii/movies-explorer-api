@@ -1,5 +1,14 @@
-const httpStatusCodes = {};
+const httpStatusCodes = {
+  ok: {
+    code: 200,
+  },
+  notFound: {
+    code: 404,
+    messages: {
+      user: 'Пользователь не найден',
+      page: 'Страница не найдена',
+    },
+  },
+};
 
 module.exports = httpStatusCodes;
-
-//   throw new NotFoundError(httpStatusCodes.notFound.messages.user);
