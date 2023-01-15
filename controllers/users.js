@@ -2,6 +2,10 @@ const User = require('../models/user');
 const httpStatusCodes = require('../utils/constants');
 const NotFoundError = require('../errors/not-found-err');
 
+const createUser = (req, res, next) => {};
+
+const loginUser = (req, res, next) => {};
+
 const getUser = async (req, res, next) => {
   const userId = req.user._id;
 
@@ -45,6 +49,8 @@ const updateUser = async (req, res, next) => {
 };
 
 module.exports = {
+  createUser,
+  loginUser,
   getUser,
   updateUser,
 };
