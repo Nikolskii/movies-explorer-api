@@ -64,11 +64,12 @@ const getUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
+  const userId = req.user._id;
   const { name, email } = req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
-      req.user._id,
+      userId,
       {
         name,
         email,
