@@ -18,6 +18,33 @@ const getUser = async (req, res, next) => {
   }
 };
 
+const updateUser = async (req, res, next) => {
+  const { name, email } = req.body;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        name,
+        email,
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+
+    if (!updatedUser) {
+      throw new NotFoundError(httpStatusCodes.notFound.messages.user);
+    }
+
+    return res.status(httpStatusCodes.ok.code).send(updatedUser);
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   getUser,
+  updateUser,
 };
