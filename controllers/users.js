@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const httpStatusCodes = require('../utils/constants');
 const NotFoundError = require('../errors/not-found-err');
@@ -24,7 +25,27 @@ const createUser = async (req, res, next) => {
   }
 };
 
-// const loginUser = (req, res, next) => {};
+const loginUser = async (req, res, next) => {
+  const { NODE_ENV, JWT_SECRET } = process.env;
+
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findUserByCredentials(email, password);
+
+    const token = jwt.sign(
+      { _id: user._id },
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      {
+        expiresIn: '7d',
+      },
+    );
+
+    return res.send({ token });
+  } catch (e) {
+    next(e);
+  }
+};
 
 const getUser = async (req, res, next) => {
   const userId = req.user._id;
@@ -70,7 +91,7 @@ const updateUser = async (req, res, next) => {
 
 module.exports = {
   createUser,
-  // loginUser,
+  loginUser,
   getUser,
   updateUser,
 };
