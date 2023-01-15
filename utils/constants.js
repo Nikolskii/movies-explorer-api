@@ -9,6 +9,9 @@ const httpStatusCodes = {
       page: 'Страница не найдена',
     },
   },
+  created: {
+    code: 201,
+  },
 };
 
 module.exports = httpStatusCodes;

@@ -1,4 +1,5 @@
 const Movie = require('../models/movie');
+const httpStatusCodes = require('../utils/constants');
 
 const getMovies = async (req, res, next) => {};
 
