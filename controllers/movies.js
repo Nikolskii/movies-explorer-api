@@ -1,7 +1,15 @@
 const Movie = require('../models/movie');
 const httpStatusCodes = require('../utils/constants');
 
-const getMovies = async (req, res, next) => {};
+const getMovies = async (req, res, next) => {
+  try {
+    const movies = await Movie.find({ owner: req.user._id });
+
+    return res.status(httpStatusCodes.ok.code).send(movies);
+  } catch (e) {
+    next(e);
+  }
+};
 
 const createMovie = async (req, res, next) => {
   const {
