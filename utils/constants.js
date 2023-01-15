@@ -2,6 +2,24 @@ const httpStatusCodes = {
   ok: {
     code: 200,
   },
+  created: {
+    code: 201,
+  },
+  badRequest: {
+    code: 400,
+    message: 'Переданы некорректные данные',
+  },
+  unauthorized: {
+    code: 401,
+    messages: {
+      incorrectUserData: 'Неправильные почта или пароль',
+      incorrectToken: 'Необходима авторизация',
+    },
+  },
+  forbidden: {
+    code: 403,
+    message: 'Не хватает прав доступа',
+  },
   notFound: {
     code: 404,
     messages: {
@@ -10,12 +28,13 @@ const httpStatusCodes = {
       page: 'Страница не найдена',
     },
   },
-  created: {
-    code: 201,
+  conflict: {
+    code: 409,
+    message: 'Пользователь с указанными данными уже зарегистрирован',
   },
-  forbidden: {
-    code: 403,
-    message: 'Не хватает прав доступа',
+  internalServerError: {
+    code: 500,
+    message: 'Произошла внутренняя ошибка сервера',
   },
 };
 

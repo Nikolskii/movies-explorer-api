@@ -1,10 +1,30 @@
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const httpStatusCodes = require('../utils/constants');
 const NotFoundError = require('../errors/not-found-err');
 
-const createUser = (req, res, next) => {};
+const createUser = async (req, res, next) => {
+  const { name, email, password } = req.body;
 
-const loginUser = (req, res, next) => {};
+  try {
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      name,
+      email,
+      password: hashPassword,
+    });
+
+    return res.status(httpStatusCodes.created.code).send({
+      name: user.name,
+      email: user.email,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+// const loginUser = (req, res, next) => {};
 
 const getUser = async (req, res, next) => {
   const userId = req.user._id;
@@ -50,7 +70,7 @@ const updateUser = async (req, res, next) => {
 
 module.exports = {
   createUser,
-  loginUser,
+  // loginUser,
   getUser,
   updateUser,
 };
