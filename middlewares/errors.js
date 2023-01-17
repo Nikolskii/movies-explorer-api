@@ -4,11 +4,13 @@ module.exports = (err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
   if (err.name === 'ValidationError') {
-    res.status(httpStatusCodes.badRequest.code).send({ message: err.message });
+    return res
+      .status(httpStatusCodes.badRequest.code)
+      .send({ message: err.message });
   }
 
   if (err.name === 'JsonWebTokenError') {
-    res
+    return res
       .status(httpStatusCodes.unauthorized.code)
       .send({ message: httpStatusCodes.unauthorized.messages.incorrectToken });
   }
@@ -20,7 +22,7 @@ module.exports = (err, req, res, next) => {
   }
 
   if (err.code === 11000) {
-    res
+    return res
       .status(httpStatusCodes.conflict.code)
       .send({ message: httpStatusCodes.conflict.message });
   }
