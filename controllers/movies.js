@@ -11,8 +11,8 @@ const getMovies = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  return undefined;
 };
-
 const createMovie = async (req, res, next) => {
   try {
     const movie = await Movie.create({
@@ -24,6 +24,7 @@ const createMovie = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  return undefined;
 };
 
 const deleteMovie = async (req, res, next) => {
@@ -49,6 +50,7 @@ const deleteMovie = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  return undefined;
 };
 
 module.exports = {

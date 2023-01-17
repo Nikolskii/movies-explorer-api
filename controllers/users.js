@@ -23,6 +23,7 @@ const createUser = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  return undefined;
 };
 
 const loginUser = async (req, res, next) => {
@@ -45,6 +46,7 @@ const loginUser = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  return undefined;
 };
 
 const getUser = async (req, res, next) => {
@@ -64,6 +66,7 @@ const getUser = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  return undefined;
 };
 
 const updateUser = async (req, res, next) => {
@@ -91,6 +94,7 @@ const updateUser = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  return undefined;
 };
 
 module.exports = {
