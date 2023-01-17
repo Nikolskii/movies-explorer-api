@@ -14,33 +14,9 @@ const getMovies = async (req, res, next) => {
 };
 
 const createMovie = async (req, res, next) => {
-  const {
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    nameRU,
-    nameEN,
-    thumbnail,
-    movieId,
-  } = req.body;
-
   try {
     const movie = await Movie.create({
-      country,
-      director,
-      duration,
-      year,
-      description,
-      image,
-      trailerLink,
-      nameRU,
-      nameEN,
-      thumbnail,
-      movieId,
+      ...req.body,
       owner: req.user._id,
     });
 
