@@ -59,10 +59,7 @@ const getUser = async (req, res, next) => {
       throw new NotFoundError(httpStatusCodes.notFound.messages.user);
     }
 
-    return res.status(httpStatusCodes.ok.code).send({
-      email: user.email,
-      name: user.name,
-    });
+    return res.status(httpStatusCodes.ok.code).send(user);
   } catch (e) {
     next(e);
   }
