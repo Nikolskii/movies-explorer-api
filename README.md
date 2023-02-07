@@ -8,7 +8,6 @@
 
 [Канбан-доска](https://github.com/users/Nikolskii/projects/4/) дипломного проекта в GitHub Projects.
 
-- IP 158.160.37.111
 - Backend [https://api.nikolsky.nomoredomains.rocks](https://api.nikolsky.nomoredomains.rocks)
 
 ### Функционал
