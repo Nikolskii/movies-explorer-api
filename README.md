@@ -8,8 +8,6 @@
 
 [Канбан-доска](https://github.com/users/Nikolskii/projects/4/) дипломного проекта в GitHub Projects.
 
-- Backend [https://api.nikolsky.nomoredomains.rocks](https://api.nikolsky.nomoredomains.rocks)
-
 ### Функционал
 
 - Регистрация и авторизация пользователей
