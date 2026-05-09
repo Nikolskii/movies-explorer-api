@@ -42,11 +42,31 @@ const loginUser = async (req, res, next) => {
       },
     );
 
-    return res.send({ token });
+    return res
+      .cookie('jwt', token, {
+        httpOnly: true,
+        sameSite: NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: NODE_ENV === 'production', // в проде true (https)
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 дней
+      })
+      .send({ ok: true });
   } catch (e) {
     next(e);
   }
   return undefined;
+};
+
+const logout = (req, res) => {
+  console.log('RUN LOGOUT');
+  const { NODE_ENV } = process.env;
+
+  return res
+    .clearCookie('jwt', {
+      httpOnly: true,
+      sameSite: NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: NODE_ENV === 'production',
+    })
+    .send({ ok: true });
 };
 
 const getUser = async (req, res, next) => {
@@ -99,4 +119,5 @@ module.exports = {
   loginUser,
   getUser,
   updateUser,
+  logout,
 };

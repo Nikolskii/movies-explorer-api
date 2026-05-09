@@ -4,16 +4,34 @@ const UnauthorizedError = require('../errors/unauthorized-err');
 
 module.exports = (req, res, next) => {
   const { NODE_ENV, JWT_SECRET } = process.env;
-  const { authorization } = req.headers;
-  let payload;
+  console.log('req', req);
+  const token = req.cookies.jwt; // ✅ из cookie
+  if (!token) {
+    return next(
+      new UnauthorizedError(
+        httpStatusCodes.unauthorized.messages.incorrectToken,
+      ),
+    );
+  }
+
+  // const { authorization } = req.headers;
+  // let payload;
 
   try {
-    const token = authorization.replace('Bearer ', '');
-
-    payload = jwt.verify(
+    const payload = jwt.verify(
       token,
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
     );
+
+    req.user = payload;
+    return next();
+
+    // const token = authorization.replace('Bearer ', '');
+
+    // payload = jwt.verify(
+    //   token,
+    //   NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'
+    // );
   } catch (e) {
     next(
       new UnauthorizedError(
@@ -22,7 +40,7 @@ module.exports = (req, res, next) => {
     );
   }
 
-  req.user = payload;
+  // req.user = payload;
 
   next();
 };
